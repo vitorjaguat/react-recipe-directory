@@ -18,6 +18,7 @@ export default function Create() {
     'http://localhost:3000/recipes',
     'POST'
   );
+  if (error) throw new Error();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +46,7 @@ export default function Create() {
     if (data) {
       history.push('/');
     }
-  }, [data]);
+  }, [data, history]);
 
   const handleAdd = (e) => {
     e.preventDefault();

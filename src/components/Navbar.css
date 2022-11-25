@@ -1,12 +1,12 @@
 .navbar {
   background: #58249c;
-  padding: 20px;
+  padding: 1.2rem;
   color: #fff;
 }
 .navbar nav {
   display: flex;
   align-items: center;
-  max-width: 1200px;
+  max-width: 80rem;
   margin: 0 auto;
 }
 .navbar a.brand {
