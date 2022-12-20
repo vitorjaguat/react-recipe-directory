@@ -13,6 +13,9 @@
   margin-right: auto;
   color: #fff;
   text-decoration: none;
+  letter-spacing: 3px;
+  font-weight: 100;
+  font-size: 1.2rem;
 }
 .navbar a:last-child {
   color: #fff;
@@ -21,6 +24,7 @@
   padding: 8px;
   border: 1px solid #fff;
   border-radius: 4px;
+  font-size: 1rem;
 }
 .navbar a:last-child:hover {
   background: #fff;

@@ -1,3 +1,7 @@
+.searchbar {
+  font-size: 1rem;
+}
+
 .searchbar form {
   display: flex;
   align-items: center;
