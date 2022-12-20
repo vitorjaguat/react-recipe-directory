@@ -26,16 +26,16 @@ export default function RecipeList({ recipes }) {
             <p>{recipe.cookingTime} to make.</p>
             <div>{recipe.method.substring(0, 100)}...</div>
             <Link to={`/recipes/${recipe.id}`}>Cook This</Link>
+            <img
+              className="delete"
+              src={Trashcan}
+              alt="delete"
+              onClick={() => handleClick(recipe.id)}
+            />
           </div>
           <div className="img">
-            <img src="https://media-cdn.tripadvisor.com/media/photo-s/1c/2f/33/2d/healthy-bowl-frische.jpg" />
+            <img src={recipe.image} />
           </div>
-          <img
-            className="delete"
-            src={Trashcan}
-            alt="delete"
-            onClick={() => handleClick(recipe.id)}
-          />
         </div>
       ))}
     </div>

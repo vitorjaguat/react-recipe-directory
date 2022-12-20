@@ -11,6 +11,7 @@ export default function Create() {
   const [cookingTime, setCookingTime] = useState('');
   const [newIngredient, setNewIngredient] = useState('');
   const [ingredients, setIngredients] = useState([]);
+  const [image, setImage] = useState('');
   const ingredientInput = useRef(null);
   const history = useHistory();
 
@@ -21,6 +22,7 @@ export default function Create() {
       ingredients,
       method,
       cookingTime: cookingTime + ' minutes',
+      image,
     };
 
     try {
@@ -92,6 +94,16 @@ export default function Create() {
             type="number"
             onChange={(e) => setCookingTime(e.target.value)}
             value={cookingTime}
+            required
+          />
+        </label>
+
+        <label>
+          <span>Image (url):</span>
+          <input
+            type="text"
+            onChange={(e) => setImage(e.target.value)}
+            value={image}
             required
           />
         </label>

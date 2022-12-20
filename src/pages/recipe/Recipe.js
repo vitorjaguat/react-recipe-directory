@@ -49,6 +49,7 @@ export default function Recipe() {
       {isPending && <p className="loading">Loading...</p>}
       {recipe && (
         <>
+          <img className="image" src={recipe.image} />
           <h2 className="page-title">{recipe.title}</h2>
           <p>Takes {recipe.cookingTime} to cook.</p>
           <ul>
