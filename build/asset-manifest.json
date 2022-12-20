@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-recipe-directory/static/css/main.2d0cb34a.chunk.css",
+    "main.js": "/react-recipe-directory/static/js/main.df99b1ec.chunk.js",
+    "main.js.map": "/react-recipe-directory/static/js/main.df99b1ec.chunk.js.map",
+    "runtime-main.js": "/react-recipe-directory/static/js/runtime-main.7340b7a6.js",
+    "runtime-main.js.map": "/react-recipe-directory/static/js/runtime-main.7340b7a6.js.map",
+    "static/js/2.f8ccccc6.chunk.js": "/react-recipe-directory/static/js/2.f8ccccc6.chunk.js",
+    "static/js/2.f8ccccc6.chunk.js.map": "/react-recipe-directory/static/js/2.f8ccccc6.chunk.js.map",
+    "index.html": "/react-recipe-directory/index.html",
+    "static/css/main.2d0cb34a.chunk.css.map": "/react-recipe-directory/static/css/main.2d0cb34a.chunk.css.map",
+    "static/js/2.f8ccccc6.chunk.js.LICENSE.txt": "/react-recipe-directory/static/js/2.f8ccccc6.chunk.js.LICENSE.txt",
+    "static/media/mode-icon.651cf792.svg": "/react-recipe-directory/static/media/mode-icon.651cf792.svg",
+    "static/media/trashcan.3270f2c9.svg": "/react-recipe-directory/static/media/trashcan.3270f2c9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7340b7a6.js",
+    "static/js/2.f8ccccc6.chunk.js",
+    "static/css/main.2d0cb34a.chunk.css",
+    "static/js/main.df99b1ec.chunk.js"
+  ]
+}
