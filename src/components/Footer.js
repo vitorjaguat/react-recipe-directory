@@ -6,6 +6,8 @@ export default function Footer() {
   return (
     <div style={{ background: color }} className={`footer ${mode}`}>
       <p>Jaguat 2022</p>
+      <b>login</b>
+      <small>topo</small>
     </div>
   );
 }
