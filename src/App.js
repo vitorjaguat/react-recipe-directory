@@ -7,6 +7,7 @@ import Create from './pages/create/Create';
 import Search from './pages/search/Search';
 import Recipe from './pages/recipe/Recipe';
 import Footer from './components/Footer';
+import Update from './pages/update/Update';
 
 //styles
 import './App.css';
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path="/create">
             <Create />
+          </Route>
+          <Route path="/update/:id">
+            <Update />
           </Route>
           <Route path="/search">
             <Search />

@@ -12,4 +12,8 @@ diminuir opacidade do mode icon
 
 ---
 
-update page
+update page:
+
+- copiar useEffect e handleUpdate de RecipeItem.js para Update.js
+- tentar passar recipe como prop para update (para evitar ter que usar o useEffect fazendo uma nova chamada para o servidor)
+- pre-preencher os inputs de Update.js com os dados do objeto recipe

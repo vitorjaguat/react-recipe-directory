@@ -1,6 +1,6 @@
 import { projectFirestore } from '../../firebase/config';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 
 //styles
@@ -49,7 +49,7 @@ export default function Recipe() {
       {isPending && <p className="loading">Loading...</p>}
       {recipe && (
         <>
-          <img className="image" src={recipe.image} />
+          <img className="image" src={recipe.image} alt={recipe.title} />
           <h2 className="page-title">{recipe.title}</h2>
           <p>Takes {recipe.cookingTime} to cook.</p>
           <ul>
@@ -58,7 +58,7 @@ export default function Recipe() {
             ))}
           </ul>
           <p className="method">{recipe.method}</p>
-          <button onClick={handleUpdate}>Update me</button>
+          <Link to={`/update/${recipe.id}`}>Update me</Link>
         </>
       )}
     </div>

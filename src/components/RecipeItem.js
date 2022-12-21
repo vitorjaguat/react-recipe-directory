@@ -29,7 +29,7 @@ export default function RecipeItem({ recipe }) {
           </div>
         </div>
         <div className="img">
-          <img src={recipe.image} />
+          <img src={recipe.image} alt={recipe.title} />
         </div>
       </div>
     </div>

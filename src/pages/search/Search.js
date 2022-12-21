@@ -20,17 +20,21 @@ export default function Search() {
   useEffect(() => {
     setIsPending(true);
     setRecipes(null);
-    const collectionRef = db.collection('recipes');
-    collectionRef.get().then((docs) => {
-      let docArray = [];
-      docs.forEach((doc) => {
-        if (doc.data().title.toLowerCase().includes(query.toLowerCase())) {
-          docArray.push({ id: doc.id, ...doc.data() });
-        }
+    try {
+      const collectionRef = db.collection('recipes');
+      collectionRef.get().then((docs) => {
+        let docArray = [];
+        docs.forEach((doc) => {
+          if (doc.data().title.toLowerCase().includes(query.toLowerCase())) {
+            docArray.push({ id: doc.id, ...doc.data() });
+          }
+        });
+        setIsPending(false);
+        setRecipes(docArray);
       });
-      setIsPending(false);
-      setRecipes(docArray);
-    });
+    } catch (err) {
+      setError(err);
+    }
   }, [query]);
 
   return (
