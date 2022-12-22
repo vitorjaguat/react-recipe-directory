@@ -1,20 +1,23 @@
 import { useState, useRef } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { projectFirestore } from '../../firebase/config';
 
 //styles
 import './Update.css';
 
 export default function Update() {
-  const [title, setTitle] = useState('');
-  const [method, setMethod] = useState('');
-  const [cookingTime, setCookingTime] = useState('');
+  const { recipe } = useLocation();
+  console.log(recipe);
+  const [title, setTitle] = useState(recipe.title);
+  const [method, setMethod] = useState(recipe.method);
+  const [cookingTime, setCookingTime] = useState(
+    +recipe.cookingTime.replace(/\D/g, '')
+  );
   const [newIngredient, setNewIngredient] = useState('');
-  const [ingredients, setIngredients] = useState([]);
-  const [image, setImage] = useState('');
+  const [ingredients, setIngredients] = useState(recipe.ingredients);
+  const [image, setImage] = useState(recipe.image);
   const ingredientInput = useRef(null);
   const history = useHistory();
-  const { id } = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,9 +66,10 @@ export default function Update() {
           <span>Recipe ingredients:</span>
           <div className="ingredients">
             <input
+              size="90"
               type="text"
               onChange={(e) => setNewIngredient(e.target.value)}
-              value={newIngredient}
+              value={ingredients}
               ref={ingredientInput}
             />
             <button onClick={handleAdd} className="btn">

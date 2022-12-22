@@ -58,7 +58,9 @@ export default function Recipe() {
             ))}
           </ul>
           <p className="method">{recipe.method}</p>
-          <Link to={`/update/${recipe.id}`}>Update me</Link>
+          <Link to={{ pathname: `/update/${id}`, recipe: { ...recipe, id } }}>
+            Update me
+          </Link>
         </>
       )}
     </div>
