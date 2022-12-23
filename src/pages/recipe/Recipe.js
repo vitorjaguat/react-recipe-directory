@@ -1,6 +1,6 @@
 import { projectFirestore } from '../../firebase/config';
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 
 //styles
@@ -8,7 +8,8 @@ import './Recipe.css';
 
 export default function Recipe() {
   const { id } = useParams();
-  const { mode } = useTheme();
+  const { mode, color } = useTheme();
+  const history = useHistory();
 
   const [recipe, setRecipe] = useState(null);
   const [isPending, setIsPending] = useState(false);
@@ -34,13 +35,13 @@ export default function Recipe() {
     return () => unsub();
   }, [id]);
 
-  const handleUpdate = () => {
-    projectFirestore
-      .collection('recipes')
-      .doc(id)
-      .update({
-        title: `${recipe.title} UPDATED`,
-      });
+  const handleClickUpdateBtn = () => {
+    history.push({ pathname: `/update/${id}`, recipe: { ...recipe, id } });
+  };
+
+  const handleClickDeleteBtn = (id) => {
+    projectFirestore.collection('recipes').doc(id).delete();
+    history.push('/');
   };
 
   return (
@@ -51,16 +52,23 @@ export default function Recipe() {
         <>
           <img className="image" src={recipe.image} alt={recipe.title} />
           <h2 className="page-title">{recipe.title}</h2>
-          <p>Takes {recipe.cookingTime} to cook.</p>
+          <small>Takes {recipe.cookingTime} to cook.</small>
           <ul>
             {recipe.ingredients.map((ing) => (
               <li key={ing}>{ing}</li>
             ))}
           </ul>
           <p className="method">{recipe.method}</p>
-          <Link to={{ pathname: `/update/${id}`, recipe: { ...recipe, id } }}>
-            Update me
-          </Link>
+
+          <button onClick={handleClickUpdateBtn} style={{ background: color }}>
+            Update
+          </button>
+          <button
+            onClick={() => handleClickDeleteBtn(id)}
+            style={{ background: color }}
+          >
+            Delete
+          </button>
         </>
       )}
     </div>

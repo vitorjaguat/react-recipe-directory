@@ -1,19 +1,21 @@
-.create {
+.update {
   color: #555;
   max-width: 480px;
   margin: 60px auto;
+  font-size: 1rem;
+  padding-bottom: 4rem;
 }
-.create label span {
+.update label span {
   display: block;
   margin: 30px 0 10px;
 }
-.create p {
+.update p {
   margin-top: 10px;
   font-size: 0.8em;
 }
-.create button {
+.update button {
   display: block;
-  width: 100px;
+  width: 100%;
   font-size: 1em;
   color: #fff;
   padding: 8px 20px;
@@ -22,7 +24,16 @@
   background-color: #58249c;
   cursor: pointer;
   text-decoration: none;
-  margin: 20px auto;
+  margin: 50px auto;
+}
+
+.update input {
+  font-family: inherit;
+}
+
+.update textarea {
+  height: 30rem;
+  font-family: inherit;
 }
 
 .ingredients {

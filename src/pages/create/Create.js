@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { projectFirestore } from '../../firebase/config';
+import { useTheme } from '../../hooks/useTheme';
 
 //styles
 import './Create.css';
@@ -14,6 +15,7 @@ export default function Create() {
   const [image, setImage] = useState('');
   const ingredientInput = useRef(null);
   const history = useHistory();
+  const { mode, color } = useTheme();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,11 +47,11 @@ export default function Create() {
   };
 
   return (
-    <div className="create">
+    <div className={`create ${mode}`}>
       <h2 className="page-title">Add a New Recipe</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          <span>Recipe title:</span>
+          <span className={mode}>Recipe title:</span>
           <input
             type="text"
             onChange={(e) => setTitle(e.target.value)}
@@ -59,7 +61,7 @@ export default function Create() {
         </label>
 
         <label>
-          <span>Recipe ingredients:</span>
+          <span className={mode}>Recipe ingredients:</span>
           <div className="ingredients">
             <input
               type="text"
@@ -67,12 +69,12 @@ export default function Create() {
               value={newIngredient}
               ref={ingredientInput}
             />
-            <button onClick={handleAdd} className="btn">
+            <button onClick={handleAdd} style={{ background: color }}>
               add
             </button>
           </div>
         </label>
-        <p>
+        <p className={mode}>
           Current ingredients:{' '}
           {ingredients.map((i) => (
             <em key={i}>{i}, </em>
@@ -80,7 +82,7 @@ export default function Create() {
         </p>
 
         <label>
-          <span>Recipe method:</span>
+          <span className={mode}>Recipe method:</span>
           <textarea
             onChange={(e) => setMethod(e.target.value)}
             value={method}
@@ -89,7 +91,7 @@ export default function Create() {
         </label>
 
         <label>
-          <span>Cooking time (minutes):</span>
+          <span className={mode}>Cooking time (minutes):</span>
           <input
             type="number"
             onChange={(e) => setCookingTime(e.target.value)}
@@ -99,7 +101,7 @@ export default function Create() {
         </label>
 
         <label>
-          <span>Image (url):</span>
+          <span className={mode}>Image (url):</span>
           <input
             type="text"
             onChange={(e) => setImage(e.target.value)}

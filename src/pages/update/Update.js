@@ -13,13 +13,18 @@ export default function Update() {
   const [cookingTime, setCookingTime] = useState(
     +recipe.cookingTime.replace(/\D/g, '')
   );
-  const [newIngredient, setNewIngredient] = useState('');
+
   const [ingredients, setIngredients] = useState(recipe.ingredients);
   const [image, setImage] = useState(recipe.image);
-  const ingredientInput = useRef(null);
+
   const history = useHistory();
 
-  const handleSubmit = async (e) => {
+  const handleIngredients = (e) => {
+    const newIngredients = e.target.value.split(',');
+    setIngredients(newIngredients);
+  };
+
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const doc = {
       title,
@@ -30,28 +35,22 @@ export default function Update() {
     };
 
     try {
-      await projectFirestore.collection('recipes').add(doc);
-      history.push('/');
+      await projectFirestore
+        .collection('recipes')
+        .doc(recipe.id)
+        .update({
+          ...doc,
+        });
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const handleAdd = (e) => {
-    e.preventDefault();
-    const ing = newIngredient.trim();
-
-    if (ing && !ingredients.includes(ing)) {
-      setIngredients((prevIngredients) => [...prevIngredients, ing]);
-    }
-    setNewIngredient('');
-    ingredientInput.current.focus();
+    history.push(`/recipes/${recipe.id}`);
   };
 
   return (
-    <div className="create">
-      <h2 className="page-title">Add a New Recipe</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="update">
+      <h2 className="page-title">Update your recipe</h2>
+      <form onSubmit={handleUpdate}>
         <label>
           <span>Recipe title:</span>
           <input
@@ -66,23 +65,12 @@ export default function Update() {
           <span>Recipe ingredients:</span>
           <div className="ingredients">
             <input
-              size="90"
               type="text"
-              onChange={(e) => setNewIngredient(e.target.value)}
+              onChange={(e) => handleIngredients(e)}
               value={ingredients}
-              ref={ingredientInput}
             />
-            <button onClick={handleAdd} className="btn">
-              add
-            </button>
           </div>
         </label>
-        <p>
-          Current ingredients:{' '}
-          {ingredients.map((i) => (
-            <em key={i}>{i}, </em>
-          ))}
-        </p>
 
         <label>
           <span>Recipe method:</span>
