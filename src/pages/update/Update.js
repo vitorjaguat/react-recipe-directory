@@ -11,7 +11,7 @@ export default function Update() {
   const [title, setTitle] = useState(recipe.title);
   const [method, setMethod] = useState(recipe.method);
   const [cookingTime, setCookingTime] = useState(
-    +recipe.cookingTime.replace(/\D/g, '')
+    recipe.cookingTime.replace(/\D/g, '')
   );
 
   const [ingredients, setIngredients] = useState(recipe.ingredients);

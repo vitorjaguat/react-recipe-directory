@@ -8,6 +8,7 @@ import Search from './pages/search/Search';
 import Recipe from './pages/recipe/Recipe';
 import Footer from './components/Footer';
 import Update from './pages/update/Update';
+import Login from './pages/login-etc/Login';
 
 //styles
 import './App.css';
@@ -38,6 +39,9 @@ function App() {
           </Route>
           <Route path="/recipes/:id">
             <Recipe />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
         </Switch>
 
