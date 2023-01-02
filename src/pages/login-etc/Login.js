@@ -53,8 +53,11 @@ export default function Login() {
         }
       })
       .then((data) => {
-        authCtx.login(data.idToken);
-        console.log(data);
+        const expirationTime = new Date(
+          new Date().getTime() + +data.expiresIn * 1000
+        ); // expirationTime = now + expiresIn (s -> ms)
+        authCtx.login(data.idToken, expirationTime.toISOString()); //pass expirationTime as a string, because in AuthContext.js we're creating a Date object from it.
+
         history.replace('/');
       })
       .catch((err) => {
