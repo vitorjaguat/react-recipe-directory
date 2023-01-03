@@ -17,7 +17,7 @@
   font-weight: 100;
   font-size: 1.2rem;
 }
-.navbar a:last-child {
+.navbar .link {
   color: #fff;
   text-decoration: none;
   margin-left: 40px;
@@ -26,7 +26,14 @@
   border-radius: 4px;
   font-size: 1rem;
 }
-.navbar a:last-child:hover {
+.navbar .link:hover {
   background: #fff;
   color: #333;
+}
+.navbar .logout img {
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: 2rem;
 }
