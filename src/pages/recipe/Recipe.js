@@ -1,7 +1,8 @@
 import { projectFirestore } from '../../firebase/config';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
+import AuthContext from '../../context/AuthContext';
 
 //styles
 import './Recipe.css';
@@ -10,6 +11,7 @@ export default function Recipe() {
   const { id } = useParams();
   const { mode, color } = useTheme();
   const history = useHistory();
+  const { token, uid } = useContext(AuthContext);
 
   const [recipe, setRecipe] = useState(null);
   const [isPending, setIsPending] = useState(false);
@@ -36,12 +38,20 @@ export default function Recipe() {
   }, [id]);
 
   const handleClickUpdateBtn = () => {
-    history.push({ pathname: `/update/${id}`, recipe: { ...recipe, id } });
+    if (token && uid === recipe.uid) {
+      history.push({ pathname: `/update/${id}`, recipe: { ...recipe, id } });
+    } else {
+      alert("You don't have permission to update this recipe!");
+    }
   };
 
   const handleClickDeleteBtn = (id) => {
-    projectFirestore.collection('recipes').doc(id).delete();
-    history.push('/');
+    if (token && uid === recipe.uid) {
+      projectFirestore.collection('recipes').doc(id).delete();
+      history.push('/');
+    } else {
+      alert("You don't have permission to delete this recipe!");
+    }
   };
 
   return (
@@ -60,15 +70,22 @@ export default function Recipe() {
           </ul>
           <p className="method">{recipe.method}</p>
 
-          <button onClick={handleClickUpdateBtn} style={{ background: color }}>
-            Update
-          </button>
-          <button
-            onClick={() => handleClickDeleteBtn(id)}
-            style={{ background: color }}
-          >
-            Delete
-          </button>
+          {token && uid === recipe.uid && (
+            <button
+              onClick={handleClickUpdateBtn}
+              style={{ background: color }}
+            >
+              Update
+            </button>
+          )}
+          {token && uid === recipe.uid && (
+            <button
+              onClick={() => handleClickDeleteBtn(id)}
+              style={{ background: color }}
+            >
+              Delete
+            </button>
+          )}
         </>
       )}
     </div>

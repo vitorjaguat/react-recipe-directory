@@ -1,17 +1,18 @@
 {
   "name": "cooking-ninja",
   "version": "0.1.0",
+  "homepage": "https://vitorjaguat.github.io/react-recipe-directory",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "firebase": "8.5",
+    "firebase": "^8.10.1",
     "gh-pages": "^4.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "5.1",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -39,6 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "https://vitorjaguat.github.io/react-recipe-directory"
+  }
 }

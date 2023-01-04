@@ -62,8 +62,8 @@
 .recipe-item .card .delete {
   cursor: pointer;
   filter: invert(60%);
-  max-width: 2rem;
-  max-height: 2rem;
+  max-width: 1.8rem;
+  max-height: 1.8rem;
 }
 
 .recipe-item .card .img {

@@ -56,7 +56,7 @@ export default function Login() {
         const expirationTime = new Date(
           new Date().getTime() + +data.expiresIn * 1000
         ); // expirationTime = now + expiresIn (s -> ms)
-        authCtx.login(data.idToken, expirationTime.toISOString()); //pass expirationTime as a string, because in AuthContext.js we're creating a Date object from it.
+        authCtx.login(data.idToken, expirationTime.toISOString(), data.localId); //pass expirationTime as a string, because in AuthContext.js we're creating a Date object from it. Pass localId to store it and assign it to recipe documents.
 
         history.replace('/');
       })

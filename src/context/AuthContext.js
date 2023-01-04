@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const AuthContext = React.createContext({
+  uid: '',
   token: '',
   isLoggedIn: false,
   login: (token) => {},
@@ -22,16 +23,25 @@ export const AuthContextProvider = (props) => {
 
   const [token, setToken] = useState(initialToken);
 
+  const initialUid = localStorage.getItem('uid');
+
+  const [uid, setUid] = useState(initialUid);
+
   const userIsLoggedIn = !!token; //if token is truthy, it'll return true; if token is falsy, it'll return false.
 
   const logoutHandler = () => {
     setToken(null);
+    setUid(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('uid');
   };
 
-  const loginHandler = (token, expirationTime) => {
+  const loginHandler = (token, expirationTime, uid) => {
     setToken(token);
     localStorage.setItem('token', token);
+
+    setUid(uid);
+    localStorage.setItem('uid', uid);
 
     const remainingTime = calculateRemainingTime(expirationTime);
 
@@ -39,6 +49,7 @@ export const AuthContextProvider = (props) => {
   };
 
   const contextValue = {
+    uid: uid,
     token: token,
     isLoggedIn: userIsLoggedIn,
     login: loginHandler,

@@ -3,9 +3,12 @@ import { useTheme } from '../hooks/useTheme';
 import Trashcan from '../assets/trashcan.svg';
 import { projectFirestore } from '../firebase/config';
 import './RecipeItem.css';
+import AuthContext from '../context/AuthContext';
+import { useContext } from 'react';
 
 export default function RecipeItem({ recipe }) {
   const { mode } = useTheme();
+  const { uid, token } = useContext(AuthContext);
 
   const handleClick = (id) => {
     projectFirestore.collection('recipes').doc(id).delete();
@@ -20,12 +23,14 @@ export default function RecipeItem({ recipe }) {
           <div>{recipe.method.substring(0, 400)}...</div>
           <div className="links">
             <Link to={`/recipes/${recipe.id}`}>Cook This</Link>
-            <img
-              className="delete"
-              src={Trashcan}
-              alt="delete"
-              onClick={() => handleClick(recipe.id)}
-            />
+            {token && recipe.uid === uid && (
+              <img
+                className="delete"
+                src={Trashcan}
+                alt="delete"
+                onClick={() => handleClick(recipe.id)}
+              />
+            )}
           </div>
         </div>
         <div className="img">

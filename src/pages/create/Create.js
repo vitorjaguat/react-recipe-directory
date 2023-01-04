@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
 import { projectFirestore } from '../../firebase/config';
 import { useTheme } from '../../hooks/useTheme';
 
@@ -17,6 +18,8 @@ export default function Create() {
   const history = useHistory();
   const { mode, color } = useTheme();
 
+  const authCtx = useContext(AuthContext);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const doc = {
@@ -25,6 +28,7 @@ export default function Create() {
       method,
       cookingTime: cookingTime + ' minutes',
       image,
+      uid: authCtx.uid,
     };
 
     try {

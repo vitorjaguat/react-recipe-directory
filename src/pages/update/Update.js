@@ -1,13 +1,14 @@
-import { useState, useRef } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { projectFirestore } from '../../firebase/config';
+import AuthContext from '../../context/AuthContext';
 
 //styles
 import './Update.css';
 
 export default function Update() {
+  const { token, uid } = useContext(AuthContext);
   const { recipe } = useLocation();
-  console.log(recipe);
   const [title, setTitle] = useState(recipe.title);
   const [method, setMethod] = useState(recipe.method);
   const [cookingTime, setCookingTime] = useState(
@@ -34,16 +35,21 @@ export default function Update() {
       image,
     };
 
-    try {
-      await projectFirestore
-        .collection('recipes')
-        .doc(recipe.id)
-        .update({
-          ...doc,
-        });
-    } catch (err) {
-      console.log(err);
+    if (token && recipe.uid === uid) {
+      try {
+        await projectFirestore
+          .collection('recipes')
+          .doc(recipe.id)
+          .update({
+            ...doc,
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      alert("You don't have permission to update this recipe!");
     }
+
     history.push(`/recipes/${recipe.id}`);
   };
 
